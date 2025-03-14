@@ -1,0 +1,29 @@
+[project]
+name = "bombparty-word-finder"
+version = "0.1.0"
+description = "A tool for automatic prompt completion in BombParty"
+authors = [
+    {name = "BleenEye"}
+]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pynput (>=1.8.0,<2.0.0)",
+    "pyautogui (>=0.9.54,<0.10.0)",
+    "numpy (>=2.2.3,<3.0.0)"
+]
+
+
+[project.scripts]
+bpfinder = "bombparty_word_finder.main:main"
+bpfinder-uninstall = "bombparty_word_finder.uninstall.main"
+
+
+[project.urls]
+Repository = "https://github.com/bleeneye/bombparty-word-finder.git"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

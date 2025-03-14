@@ -1,0 +1,12 @@
+# pycache
+__pycache__/
+
+# Wiki word frequency lists from https://github.com/IlyaSemenov/wikipedia-word-frequency/tree/master
+/*wiki-*-*-*.txt
+
+# Config files
+/config.json
+
+# Testing Jupyter notebook
+/searcher.ipynb
+
