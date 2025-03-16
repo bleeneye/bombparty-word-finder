@@ -66,7 +66,9 @@ VK_TO_CHAR = {
 }
 
 
-def vk_to_char(vk: int) -> str | None:
+def vk_to_char(vk: int | None) -> str | None:
+    if not isinstance(vk, int):
+        return None
     try:
         return VK_TO_CHAR[vk]
     except KeyError:

@@ -246,9 +246,9 @@ def on_press(key: Key | KeyCode | None) -> None:
     #ctrl + alt + shift commands
     if not {Key.ctrl_l, Key.alt_l, Key.shift} <= pressed_keys:
         return
-    try:
+    if isinstance(key, KeyCode):
         key_cha = vk_to_char(key.vk)
-    except AttributeError:
+    else:
         return
     if key_cha is None:
         return
@@ -264,9 +264,9 @@ def on_press(key: Key | KeyCode | None) -> None:
         set_reverse(False)
     elif key_cha == "-":
         set_reverse(True)
-    elif type(key_cha) == int:
+    elif isinstance(key_cha, int):
         set_n_words(key_cha)
-    elif type(key_cha) == str:
+    elif isinstance(key_cha, str):
         new_sorter = make_sorter(key_cha)
         if new_sorter is None:
             return
