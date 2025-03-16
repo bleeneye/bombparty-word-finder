@@ -7,7 +7,8 @@ While the list of words included with the tool is relatively comprehensive,
 it does not include all valid BombParty prompt solutions.
 
 Due to various dependencies requiring access to mouse and keyboard states,
-BP Word Finder does not work well on WSL.
+BP Word Finder does not work well on Windows Subsystem for Linux (WSL),
+as it does not have access to the Windows GUI sustem.
 
 *Note that I do not condone using this tool to cheat in public lobbies.
 You may be kicked from lobbies if using BP Word Finder or any other prompt assistance.*
