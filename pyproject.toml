@@ -17,7 +17,7 @@ dependencies = [
 
 [project.scripts]
 bpfinder = "bombparty_word_finder.main:main"
-bpfinder-uninstall = "bombparty_word_finder.uninstall.main"
+bpfinder-uninstall = "bombparty_word_finder.uninstall:main"
 
 
 [project.urls]
