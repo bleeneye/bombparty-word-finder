@@ -45,8 +45,6 @@ class ParamNames(Enum):
 
 CONFIG_DIR = Path.home().joinpath(".config/bombparty_word_finder")
 CONFIG_FILE = CONFIG_DIR.joinpath("config.json")
-#with open(Path("wordlist.txt")) as f:
-#    WORDLIST = np.array([word.strip().lower() for word in f.readlines()])
 LAG_SLEEP = 0.02
 
 

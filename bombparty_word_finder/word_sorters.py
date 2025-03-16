@@ -21,8 +21,6 @@ from .word_use_counts import WORD_COMMONALITIES
 
 
 USE_COUNTS_FILE = 'word_use_counts.txt'
-#with open(USE_COUNTS_FILE) as f:
-#    WORD_COMMONALITIES = {line.split(' ')[0]: line.split(' ')[1].strip() for line in f.readlines()}
 
 
 class BaseSorter(object):
