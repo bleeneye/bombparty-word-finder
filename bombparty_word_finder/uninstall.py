@@ -20,9 +20,12 @@ from .main import CONFIG_DIR
 
 
 def main() -> None:
+    if not CONFIG_DIR.is_dir():
+        print("No configuration exists")
+        return
     answer = input("Delete all BombParty Word Finder configurations? ").lower()
     if answer != "y" and answer != "yes":
-        quit()
+        return
     rmtree(CONFIG_DIR)
     print("Configuration files removed")
 
