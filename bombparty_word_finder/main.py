@@ -55,7 +55,7 @@ textbox_loc = None
 chatbox_loc = None
 cheat_enabled = False
 n_words = 0
-word_sorter = None
+word_sorter = make_sorter("r")
 reverse = False
 previous_words = np.array([])
 pressed_keys = set()
@@ -68,7 +68,7 @@ def decode_config() -> dict | None:
     if not CONFIG_FILE.is_file():
         print(f"No config file found at path {CONFIG_FILE}", flush=True)
         print("Created fresh config file", flush=True)
-        return None
+        save_params()
     with open(CONFIG_FILE, "r") as f:
         try:
             decoding = json.load(f)
@@ -94,9 +94,6 @@ def init_params() -> None:
     set_n_words(params.get(ParamNames.N_WORDS.value))
     set_reverse(params.get(ParamNames.REVERSE.value))
     word_sorter = make_sorter(params.get(ParamNames.WORD_SORTER_ID.value))
-    if word_sorter is None:
-        word_sorter = make_sorter("r")
-    save_params()
 
 
 def save_params() -> None:
