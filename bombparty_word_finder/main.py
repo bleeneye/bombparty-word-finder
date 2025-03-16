@@ -100,14 +100,16 @@ def init_params() -> None:
 
 def save_params() -> None:
     if word_sorter is None:
-        raise ValueError("Somehow word_sorter is unbound. Sorry!")
+        word_sorter_id = None
+    else:
+        word_sorter_id = word_sorter.id
     params = {
         ParamNames.BOMBTEXT_LOC.value: bombtext_loc,
         ParamNames.TEXTBOX_LOC.value: textbox_loc,
         ParamNames.CHATBOX_LOC.value: chatbox_loc,
         ParamNames.CHEAT_ENABLED.value: cheat_enabled,
         ParamNames.N_WORDS.value: n_words,
-        ParamNames.WORD_SORTER_ID.value: word_sorter.id,
+        ParamNames.WORD_SORTER_ID.value: word_sorter_id,
         ParamNames.REVERSE.value: reverse
     }
     with open(CONFIG_FILE, "w") as f:
@@ -162,8 +164,9 @@ def autocomplete() -> None:
     matching_words = find_words(substring)
     unused_matching_words = matching_words[~np.isin(matching_words, previous_words)]
     if word_sorter is None:
-        raise ValueError("Somehow word_sorter is unbound. Sorry!")
-    sorted_words = word_sorter.sort(unused_matching_words)
+        sorted_words = unused_matching_words
+    else:
+        sorted_words = word_sorter.sort(unused_matching_words)
     if not reverse:
         selected_words = sorted_words[:n_words + 1]
     else:
