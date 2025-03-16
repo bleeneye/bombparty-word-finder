@@ -20,7 +20,7 @@ from .main import CONFIG_DIR
 
 
 def main() -> None:
-    answer = input("Delete all BombParty Word Finder configurations?").lower()
+    answer = input("Delete all BombParty Word Finder configurations? ").lower()
     if answer != "y" and answer != "yes":
         quit()
     rmtree(CONFIG_DIR)
