@@ -292,6 +292,8 @@ def display_preamble() -> None:
         ├── Set chatbox location (optional): "/"
         ├── Enable/Disable cheating: "q"
         ├── Set number of extra words to enter into chat: 0-9 (default 0)
+        ├── Set sorting to forward: "+"
+        ├── Set sorting to backward: "-"
         └── SET WORD SORTERS:""", flush=True)
     sorter_ids = BaseSorter.sorter_ids()
     for sorter_id, sorter_name in sorter_ids[:-1]:

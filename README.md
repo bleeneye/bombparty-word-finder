@@ -67,18 +67,20 @@ Press `Esc` twice in quick succession to terminate BP Word Finder.
 
 Other than quitting and autosolving prompts, all commands require holding `Ctrl+Alt+Shift`.
 
-- `Ctrl+Alt+Shift+.`: Set bombtext location (required)
-- `Ctrl+Alt+Shift+,`: Set textbox location (optional)
-- `Ctrl+Alt+Shift+/`: Set chatbox location (optional)
-- `Ctrl+Alt+Shift+q`: Enable/disable cheating, *i.e., autosolving* (default: disabled)
-- `Ctrl+Alt+Shift+<0-9>`: Set number of extra words to be entered in chat (default: 0)
+- `Ctrl+Alt+Shift + .`: Set bombtext location (required)
+- `Ctrl+Alt+Shift + ,`: Set textbox location (optional)
+- `Ctrl+Alt+Shift + /`: Set chatbox location (optional)
+- `Ctrl+Alt+Shift + q`: Enable/disable cheating, *i.e., autosolving* (default: disabled)
+- `Ctrl+Alt+Shift + <0-9>`: Set number of extra words to be entered in chat (default: 0)
+- `Ctrl+Alt+Shift + +`: Set sorting to forward (e.g., Common sorter sorts most to least common) (default)
+- `Ctrl+Alt+Shift + -`: Set sorting to backward (e.g., Common sorter sorts least to most common)
 
 Various letter commands are used to switch word sorters.
 
-- `Ctrl+Alt+Shift+n`: Null sorter (does not sort words, defaults to alphabetical order)
-- `Ctrl+Alt+Shift+r`: Random sorter (sorts words randomly)
-- `Ctrl+Alt+Shift+c`: Common sorter (sorts words by use frequency)
-- `Ctrl+Alt+Shift+u`: Roulette sorter (sorts words randomly, prioritizing by use frequency)
+- `Ctrl+Alt+Shift + n`: Null sorter (does not sort words, defaults to alphabetical order)
+- `Ctrl+Alt+Shift + r`: Random sorter (sorts words randomly)
+- `Ctrl+Alt+Shift + c`: Common sorter (sorts words by use frequency)
+- `Ctrl+Alt+Shift + u`: Roulette sorter (sorts words randomly, prioritizing by use frequency)
 
 ### Autosolve prompts
 
