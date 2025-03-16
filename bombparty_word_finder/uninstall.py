@@ -23,9 +23,13 @@ def main() -> None:
     if not CONFIG_DIR.is_dir():
         print("No configuration exists")
         return
-    answer = input("Delete all BombParty Word Finder configurations? ").lower()
-    if answer != "y" and answer != "yes":
-        return
-    rmtree(CONFIG_DIR)
-    print("Configuration files removed")
+    answer = input("Delete all BombParty Word Finder configurations? (y/n) ").lower()
+    if answer == "y" or answer == "yes":
+        rmtree(CONFIG_DIR)
+        print("Configuration files removed")
+    elif answer == "n" or answer == "no":
+        print("Quitting - Configuration files not removed")
+    else:
+        print("Please enter \"y\", \"yes\", \"n\", or \"no\" (case insensitive)")
+        main()
 

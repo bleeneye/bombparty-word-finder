@@ -67,7 +67,7 @@ def decode_config() -> dict | None:
         makedirs(CONFIG_DIR)
     if not CONFIG_FILE.is_file():
         print(f"No config file found at path {CONFIG_FILE}", flush=True)
-        print("Created fresh config file", flush=True)
+        print("Created fresh config file\n", flush=True)
         save_params()
     with open(CONFIG_FILE, "r") as f:
         try:
