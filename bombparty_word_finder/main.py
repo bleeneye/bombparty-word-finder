@@ -15,12 +15,15 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
+import platform
+from typing import Any
 from enum import Enum
 from os import makedirs
 from pathlib import Path
 import json
+from pynput import keyboard, mouse
 from pynput.keyboard import Listener, Key, KeyCode
-import pyautogui
+from pynput.mouse import Button
 import pyperclip
 import numpy as np
 from numpy.typing import NDArray
@@ -46,8 +49,14 @@ class ParamNames(Enum):
 CONFIG_DIR = Path.home().joinpath(".config/bombparty_word_finder")
 CONFIG_FILE = CONFIG_DIR.joinpath("config.json")
 LAG_SLEEP = 0.02
+if platform.system() == "Darwin":
+    CTRL_KEY = Key.cmd
+else:
+    CTRL_KEY = Key.ctrl
 
 
+m_control = mouse.Controller()
+kb_control = keyboard.Controller()
 bombtext_loc = None
 textbox_loc = None
 chatbox_loc = None
@@ -116,9 +125,15 @@ def copy_bombtext() -> str | None:
     if bombtext_loc is None:
         print("WARNING: bombtext location has not been set", flush=True)
         return None
-    pyautogui.click(bombtext_loc[0], bombtext_loc[1], clicks=2)
-    with pyautogui.hold("ctrl"):
-        pyautogui.press("c")
+    #pyautogui.click(bombtext_loc[0], bombtext_loc[1], clicks=2)
+    m_control.position = (bombtext_loc[0], bombtext_loc[1])
+    m_control.click(Button.left, 2)
+    #with pyautogui.hold("ctrl"):
+    #    pyautogui.press("c")
+    kb_control.press(CTRL_KEY)
+    kb_control.press("c")
+    kb_control.release(CTRL_KEY)
+    kb_control.release("c")
     return pyperclip.paste().strip().lower()
 
 
@@ -130,22 +145,37 @@ def paste_words(words: NDArray) -> None:
     if len(words) == 0:
         words = np.array(["null"])
     if cheat_enabled and textbox_loc is not None:
-        pyautogui.click(textbox_loc[0], textbox_loc[1])
-        pyautogui.write(words[0], LAG_SLEEP)
-        pyautogui.press("enter")
+        #pyautogui.click(textbox_loc[0], textbox_loc[1])
+        #pyautogui.write(words[0], LAG_SLEEP)
+        #pyautogui.press("enter")
+        m_control.position = (textbox_loc)
+        m_control.click(Button.left)
+        kb_control.type(words[0])
+        kb_control.press(Key.enter)
+        kb_control.release(Key.enter)
         words = np.delete(words, 0)
     if len(words) == 0:
         return
     time.sleep(LAG_SLEEP)
     if chatbox_loc is not None:
-        pyautogui.click(chatbox_loc[0], chatbox_loc[1])
+        #pyautogui.click(chatbox_loc[0], chatbox_loc[1])
+        m_control.position = (chatbox_loc)
+        m_control.click(Button.left)
     pyperclip.copy(", ".join(words))
-    with pyautogui.hold("ctrl"):
-        pyautogui.press("v")
+    #with pyautogui.hold("ctrl"):
+    #    pyautogui.press("v")
+    kb_control.press(CTRL_KEY)
+    kb_control.press("v")
+    kb_control.release(CTRL_KEY)
+    kb_control.release("v")
     time.sleep(LAG_SLEEP)
-    pyautogui.press("enter")
+    #pyautogui.press("enter")
+    kb_control.press(Key.enter)
+    kb_control.release(Key.enter)
     if textbox_loc is not None:
-        pyautogui.click(textbox_loc[0], textbox_loc[1])
+        #pyautogui.click(textbox_loc[0], textbox_loc[1])
+        m_control.position = (textbox_loc)
+        m_control.click(Button.left)
 
 
 def autocomplete() -> None:
@@ -172,21 +202,32 @@ def autocomplete() -> None:
     paste_words(selected_words)
 
 
-def set_bombtext_loc(loc: pyautogui.Point | list[int] | None = None) -> None:
+def format_point(point: Any) -> tuple[int, int] | None:
+    if point is None:
+        return None
+    elif isinstance(point, tuple) and len(point) == 2 and all(isinstance(c, int) for c in point):
+        return point
+    elif isinstance(point, list) and len(point) == 2 and all(isinstance(c, int) for c in point):
+        return tuple(point)
+    else:
+        raise ValueError(f"Could not format point {point}")
+
+
+def set_bombtext_loc(loc: Any | None = None) -> None:
     global bombtext_loc
-    bombtext_loc = loc
+    bombtext_loc = format_point(loc)
     print(f"Bombtext location is {bombtext_loc}", flush=True)
 
 
-def set_textbox_loc(loc: pyautogui.Point | list[int] | None = None) -> None:
+def set_textbox_loc(loc: Any | None = None) -> None:
     global textbox_loc
-    textbox_loc = loc
+    textbox_loc = format_point(loc)
     print(f"Textbox location is {textbox_loc}", flush=True)
 
 
-def set_chatbox_loc(loc: pyautogui.Point | list[int] | None = None) -> None:
+def set_chatbox_loc(loc: Any | None = None) -> None:
     global chatbox_loc
-    chatbox_loc = loc
+    chatbox_loc = format_point(loc)
     print(f"Chatbox location is {chatbox_loc}", flush=True)
 
 
@@ -250,11 +291,11 @@ def on_press(key: Key | KeyCode | None) -> None:
     if key_cha == "q":
         set_cheat_enabled(not cheat_enabled)
     elif key_cha == ".":
-        set_bombtext_loc(pyautogui.position())
+        set_bombtext_loc(m_control.position)
     elif key_cha == ",":
-        set_textbox_loc(pyautogui.position())
+        set_textbox_loc(m_control.position)
     elif key_cha == "/":
-        set_chatbox_loc(pyautogui.position())
+        set_chatbox_loc(m_control.position)
     elif key_cha == "+":
         set_reverse(False)
     elif key_cha == "-":
@@ -302,8 +343,10 @@ def display_preamble() -> None:
 def main() -> None:
     display_preamble()
     init_params()
-    with Listener(on_press=on_press, on_release=on_release) as listener:
-        listener.join()
+    #with Listener(on_press=on_press, on_release=on_release) as listener:
+    #    listener.join()
+    kb_listener = Listener(on_press=on_press, on_release=on_release)
+    kb_listener.start()
 
 
 if __name__ == "__main__":
