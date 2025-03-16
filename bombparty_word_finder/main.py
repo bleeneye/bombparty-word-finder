@@ -134,6 +134,7 @@ def copy_bombtext() -> str | None:
     kb_control.press("c")
     kb_control.release(CTRL_KEY)
     kb_control.release("c")
+    time.sleep(LAG_SLEEP)
     return pyperclip.paste().strip().lower()
 
 
