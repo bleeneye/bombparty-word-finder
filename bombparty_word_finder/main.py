@@ -86,16 +86,17 @@ def init_params() -> None:
     params = decode_config()
     if params is None:
         print(f"Using basic defaults")
-    else:
-        set_bombtext_loc(params.get(ParamNames.BOMBTEXT_LOC.value))
-        set_textbox_loc(params.get(ParamNames.TEXTBOX_LOC.value))
-        set_chatbox_loc(params.get(ParamNames.CHATBOX_LOC.value))
-        set_cheat_enabled(params.get(ParamNames.CHEAT_ENABLED.value))
-        set_n_words(params.get(ParamNames.N_WORDS.value))
-        set_reverse(params.get(ParamNames.REVERSE.value))
-        word_sorter = make_sorter(params.get(ParamNames.WORD_SORTER_ID.value))
+        return
+    set_bombtext_loc(params.get(ParamNames.BOMBTEXT_LOC.value))
+    set_textbox_loc(params.get(ParamNames.TEXTBOX_LOC.value))
+    set_chatbox_loc(params.get(ParamNames.CHATBOX_LOC.value))
+    set_cheat_enabled(params.get(ParamNames.CHEAT_ENABLED.value))
+    set_n_words(params.get(ParamNames.N_WORDS.value))
+    set_reverse(params.get(ParamNames.REVERSE.value))
+    word_sorter = make_sorter(params.get(ParamNames.WORD_SORTER_ID.value))
     if word_sorter is None:
         word_sorter = make_sorter("r")
+    save_params()
 
 
 def save_params() -> None:
@@ -179,21 +180,18 @@ def autocomplete() -> None:
 def set_bombtext_loc(loc: pyautogui.Point | list[int] | None = None) -> None:
     global bombtext_loc
     bombtext_loc = loc
-    save_params()
     print(f"Bombtext location is {bombtext_loc}", flush=True)
 
 
 def set_textbox_loc(loc: pyautogui.Point | list[int] | None = None) -> None:
     global textbox_loc
     textbox_loc = loc
-    save_params()
     print(f"Textbox location is {textbox_loc}", flush=True)
 
 
 def set_chatbox_loc(loc: pyautogui.Point | list[int] | None = None) -> None:
     global chatbox_loc
     chatbox_loc = loc
-    save_params()
     print(f"Chatbox location is {chatbox_loc}", flush=True)
 
 
@@ -203,7 +201,6 @@ def set_cheat_enabled(enable: bool | None = None) -> None:
         cheat_enabled = False
     else:
         cheat_enabled = enable
-    save_params()
     if cheat_enabled:
         print("Cheating is enabled", flush=True)
     else:
@@ -216,7 +213,6 @@ def set_n_words(n: int | None = None) -> None:
         n_words = 0
     else:
         n_words = n
-    save_params()
     print(f"Number of extra words is {n_words}", flush=True)
 
 
@@ -226,7 +222,6 @@ def set_reverse(state: bool | None = None) -> None:
         reverse = False
     else:
         reverse = state
-    save_params()
     if reverse:
         print("Sorting in reverse order", flush=True)
     else:
@@ -276,6 +271,7 @@ def on_press(key: Key | KeyCode | None) -> None:
         if new_sorter is None:
             return
         word_sorter = new_sorter
+    save_params()
 
 
 def on_release(key: Key| KeyCode | None) -> None:
