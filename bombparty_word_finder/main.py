@@ -125,11 +125,8 @@ def copy_bombtext() -> str | None:
     if bombtext_loc is None:
         print("WARNING: bombtext location has not been set", flush=True)
         return None
-    #pyautogui.click(bombtext_loc[0], bombtext_loc[1], clicks=2)
     m_control.position = (bombtext_loc[0], bombtext_loc[1])
     m_control.click(Button.left, 2)
-    #with pyautogui.hold("ctrl"):
-    #    pyautogui.press("c")
     kb_control.press(CTRL_KEY)
     kb_control.press("c")
     kb_control.release(CTRL_KEY)
@@ -146,9 +143,6 @@ def paste_words(words: NDArray) -> None:
     if len(words) == 0:
         words = np.array(["null"])
     if cheat_enabled and textbox_loc is not None:
-        #pyautogui.click(textbox_loc[0], textbox_loc[1])
-        #pyautogui.write(words[0], LAG_SLEEP)
-        #pyautogui.press("enter")
         m_control.position = (textbox_loc)
         m_control.click(Button.left)
         kb_control.type(words[0])
@@ -159,22 +153,17 @@ def paste_words(words: NDArray) -> None:
         return
     time.sleep(LAG_SLEEP)
     if chatbox_loc is not None:
-        #pyautogui.click(chatbox_loc[0], chatbox_loc[1])
         m_control.position = (chatbox_loc)
         m_control.click(Button.left)
     pyperclip.copy(", ".join(words))
-    #with pyautogui.hold("ctrl"):
-    #    pyautogui.press("v")
     kb_control.press(CTRL_KEY)
     kb_control.press("v")
     kb_control.release(CTRL_KEY)
     kb_control.release("v")
     time.sleep(LAG_SLEEP)
-    #pyautogui.press("enter")
     kb_control.press(Key.enter)
     kb_control.release(Key.enter)
     if textbox_loc is not None:
-        #pyautogui.click(textbox_loc[0], textbox_loc[1])
         m_control.position = (textbox_loc)
         m_control.click(Button.left)
 
