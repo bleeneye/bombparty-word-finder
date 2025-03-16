@@ -66,17 +66,17 @@ def decode_config() -> dict | None:
     if not CONFIG_DIR.is_dir():
         makedirs(CONFIG_DIR)
     if not CONFIG_FILE.is_file():
-        print(f"No config file found at path {CONFIG_FILE}")
-        print("Config file will be created upon quitting the tool")
+        print(f"No config file found at path {CONFIG_FILE}", flush=True)
+        print("Config file will be created upon quitting the tool", flush=True)
         return None
     with open(CONFIG_FILE, "r") as f:
         try:
             decoding = json.load(f)
         except:
-            print(f"Error decoding config file at path {CONFIG_FILE}")
+            print(f"Error decoding config file at path {CONFIG_FILE}", flush=True)
             return None
     if not isinstance(decoding, dict):
-        print(f"Error decoding config file at path {CONFIG_FILE}")
+        print(f"Error decoding config file at path {CONFIG_FILE}", flush=True)
         return None
     return decoding
 
@@ -85,7 +85,7 @@ def init_params() -> None:
     global bombtext_loc, textbox_loc, chatbox_loc, n_words, word_sorter, reverse
     params = decode_config()
     if params is None:
-        print(f"Using basic defaults")
+        print(f"Using basic defaults", flush=True)
         return
     set_bombtext_loc(params.get(ParamNames.BOMBTEXT_LOC.value))
     set_textbox_loc(params.get(ParamNames.TEXTBOX_LOC.value))
@@ -119,7 +119,7 @@ def save_params() -> None:
 
 def copy_bombtext() -> str | None:
     if bombtext_loc is None:
-        print("WARNING: bombtext location has not been set")
+        print("WARNING: bombtext location has not been set", flush=True)
         return None
     pyautogui.click(bombtext_loc[0], bombtext_loc[1], clicks=2)
     with pyautogui.hold("ctrl"):
