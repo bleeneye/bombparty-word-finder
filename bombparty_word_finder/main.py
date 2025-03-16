@@ -16,7 +16,7 @@
 
 
 from enum import Enum
-from os import makedirs, path
+from os import makedirs
 from pathlib import Path
 import json
 from pynput.keyboard import Listener, Key, KeyCode
