@@ -15,9 +15,9 @@ You may be kicked from lobbies if using BP Word Finder or any other prompt assis
 
 ## Installation
 
-### Install Python
+### Install Conda
 
-[Instructions for installing Miniconda/Anaconda/Miniforge](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+[Instructions for installing Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
 ### Create a Conda environment
 
