@@ -87,7 +87,9 @@ Various letter commands are used to switch word sorters.
 Press `F4` to autosolve prompts.
 
 As long as a bombtext location is  set, BP Word Finder will find matching words for it.
+
 If the textbox location is set and cheating is enabled, BP Word Finder will autocomplete the current prompt.
+
 If the chatbox location is set, BP Word Finder will enter a number of words into it equal to the number of extra words.
 
 ## Uninstallation
