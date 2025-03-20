@@ -10,3 +10,6 @@ __pycache__/
 # Testing Jupyter notebook
 /searcher.ipynb
 
+# Editable install
+*.egg-info/
+
