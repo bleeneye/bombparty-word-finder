@@ -314,8 +314,6 @@ def main() -> None:
     init_params()
     with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
-    #kb_listener = Listener(on_press=on_press, on_release=on_release)
-    #kb_listener.start()
 
 
 if __name__ == "__main__":
