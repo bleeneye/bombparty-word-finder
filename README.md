@@ -120,3 +120,57 @@ Alternatively, you may delete the entire Conda environment by running the follow
 conda remove -n bpfinder --all
 ```
 
+## Editable Installations
+
+For those wishing to contribute to BP Word Finder, having an editable installation is desirable
+in order to view the effects of code changes without needing to reinstall the package.
+
+Because BP Word Finder uses Poetry as a build backend,
+simply running `pip install -e git+<repository URL>` will not properly install an editable version.
+A Poetry installation is required to install an editable version.
+
+### Install Poetry
+
+[Instructions for installing Poetry](https://python-poetry.org/docs/)
+
+### Create and activate a Conda environment
+
+Like the normal installation, we will use a Conda environment.
+
+In a terminal window, run the following commands:
+
+```
+conda create -n bpfinder-edit -y python=3.10
+conda activate bpfinder-edit
+```
+
+*If you know Poetry and would rather use a Poetry virtual environment, you may
+[create and activate a Poetry environment instead](https://python-poetry.org/docs/managing-environments/).*
+
+### Clone this repository
+
+In whichever directory you would like to store the BP Word Finder source code, run the following command:
+
+```
+git clone https://github.com/bleeneye/bombparty-word-finder.git
+```
+
+### Install dependencies
+
+In the base directory of your local clone of `bomparty-word-finder` (`cd bombparty_word_finder`), run the following command:
+
+```
+poetry install
+```
+
+### Reinstall BP Word Finder as editable version
+
+Again, in the base directory of you local clone of `bombparty-word-finder`, run the following command:
+
+```
+pip install -e .
+```
+
+Now any changes you make to the source code will immediately take effect when using
+the `bpfinder-edit` Conda environment.
+
