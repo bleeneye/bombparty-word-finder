@@ -111,7 +111,7 @@ This will remove all config files and directories associated with BP Word Finder
 In a terminal window, run the following command:
 
 ```
-pip uninstall bombparty_word_finder
+pip uninstall bpfinder
 ```
 
 Alternatively, you may delete the entire Conda environment by running the following command:
