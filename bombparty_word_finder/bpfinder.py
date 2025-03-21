@@ -288,7 +288,6 @@ def on_release(key: Key| KeyCode | None) -> None:
 
 def display_preamble() -> None:
     print("""
-
 BombParty Word Finder  Copyright (C) 2025  BleenEye
 This program comes with ABSOLUTELY NO WARRANTY; run `bpfinder -w' for details.
 This is free software, and you are welcome to redistribute it
