@@ -15,11 +15,8 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import platform
 from typing import Any
-from enum import Enum
 from os import makedirs
-from pathlib import Path
 import json
 from pynput import keyboard, mouse
 from pynput.keyboard import Listener, Key, KeyCode
@@ -31,28 +28,10 @@ import sys
 import time
 from .word_sorters import BaseSorter, make_sorter
 from .vk_to_char import vk_to_char
+from .constants import ParamNames, CONFIG_DIR, CONFIG_FILE, LAG_SLEEP, CTRL_KEY
 from .wordlist import WORDLIST
 
 sys.stdout.reconfigure(encoding="utf-8")
-
-
-class ParamNames(Enum):
-    BOMBTEXT_LOC = "bombtext_loc"
-    TEXTBOX_LOC = "textbox_loc"
-    CHATBOX_LOC = "chatbox_loc"
-    CHEAT_ENABLED = "cheat_enabled"
-    N_WORDS = "n_words"
-    WORD_SORTER_ID = "word_sorter_id"
-    REVERSE = "reverse"
-
-
-CONFIG_DIR = Path.home().joinpath(".config/bombparty_word_finder")
-CONFIG_FILE = CONFIG_DIR.joinpath("config.json")
-LAG_SLEEP = 0.02
-if platform.system() == "Darwin":
-    CTRL_KEY = Key.cmd
-else:
-    CTRL_KEY = Key.ctrl
 
 
 m_control = mouse.Controller()

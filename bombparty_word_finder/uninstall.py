@@ -16,7 +16,7 @@
 
 
 from shutil import rmtree
-from .main import CONFIG_DIR
+from .constants import CONFIG_DIR
 
 
 def main() -> None:
