@@ -40,7 +40,7 @@ conda activate bpfinder
 In a terminal window, run the following command:
 
 ```
-pip install git+https://github.com/bleeneye/bombparty-word-finder.git@main#egg=bombparty-word-finder
+pip install git+https://github.com/bleeneye/bombparty-word-finder.git@main
 ```
 
 ## Usage
