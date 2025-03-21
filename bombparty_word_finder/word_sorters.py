@@ -20,9 +20,6 @@ from numpy.typing import NDArray
 from .word_use_counts import WORD_COMMONALITIES
 
 
-USE_COUNTS_FILE = 'word_use_counts.txt'
-
-
 class BaseSorter(object):
     """#### Base class for all word sorters"""
 
