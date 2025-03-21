@@ -1,4 +1,4 @@
-# BombParty Word Finder
+# BombParty Word Finder - A tool for automatic prompt completion in BombParty
 # Copyright (C) 2025 BleenEye
 #
 # This program is free software: you can redistribute it and/or modify
